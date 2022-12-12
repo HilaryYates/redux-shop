@@ -3,22 +3,27 @@ import { useSelector } from "react-redux";
 
 const ProductComponent = () => {
   const products = useSelector((state) => state.productReducer.products);
-  console.log(products);
-  const { id, title } = products[0];
-
-  return (
-    <div className='four column wide'>
-      <div className='ui link cards'>
-        <div className='card'>
-          <div className='image'>
-            <div className='content'>
-              <div className='header'>{title}</div>
+  // console.log(products);
+  const renderList = products.map((product) => {
+    return (
+      <div className='four column wide' key={product.id}>
+        <div className='ui link cards'>
+          <div className='card'>
+            <div className='image'>
+              <img src={product.image} />
+              <div className='content'>
+                <div className='header'>{product.title}</div>
+                <div className='meta price'>${product.price}</div>
+                <div className='meta'>{product.category}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  });
+
+  return <div>{renderList}</div>;
 };
 
 export default ProductComponent;
